@@ -25,7 +25,7 @@ class ImportWizard
     use ContainerHelpers;
    
     protected $container;
-    protected $container_allow = ['user'];
+    protected $container_allow = ['system','user'];
 
     protected $db;
     protected $debug = false;
@@ -36,6 +36,7 @@ class ImportWizard
     protected $messages = array();
 
     protected $user_id;
+    protected $encrypt_key;
 
     protected $file_formats = array('LOGINS'=>'Logins CSV format','NOTES'=>'Text notes CSV format');
     protected $upload_dir = BASE_UPLOAD.UPLOAD_TEMP;
@@ -47,6 +48,9 @@ class ImportWizard
         $this->container = $container;
                
         if(defined('\Seriti\Tools\DEBUG')) $this->debug = \Seriti\Tools\DEBUG;
+
+        $system = $this->getContainer('system');
+        $this->encrypt_key = $system->configureEncryption(['redirect'=>'/admin/encrypt']);
     }
 
     public function process()
@@ -116,9 +120,8 @@ class ImportWizard
                     $value_num = count($line);
                   
                     if($i == 1) {
-                        if($file_format === 'LOGINS') Helpers::checkLoginFormat($line,$error);
-                        if($file_format === 'NOTES') Helpers::checkNoteFormat($line,$error);
-                    
+                        Helpers::checkImportFormat($file_format,$line,$error);
+                        
                         if($error !== '') {
                             $this->addError($file_format." file format errors:\r\n".$error);
                             $error_file = true;
@@ -126,8 +129,8 @@ class ImportWizard
                     } 
                   
                     if(!$error_file and $i > 1 and $value_num > 3) {  
-                        if($file_format === 'LOGINS') $status = Helpers::importLogin($this->db,$update_data,$line,$error);
-                        if($file_format === 'NOTES') $status = Helpers::importNote($this->db,$update_data,$line,$error);
+                        $status = Helpers::importData($this->db,$update_data,$file_format,$this->encrypt_key,$line,$error);
+                        
                         if($error !== '') {
                             $this->addError($error);
                         } else {
@@ -164,7 +167,7 @@ class ImportWizard
             $html .= '</div>';
     
             $html .= '<div class="row">';
-            $html .= '<div class="'.$this->classes['col_label'].'">Update matching names?:</div><div class="col-sm-6">'.
+            $html .= '<div class="'.$this->classes['col_label'].'">Update matching records?:</div><div class="col-sm-6">'.
                      Form::checkBox('update_data','YES',$update_data,'edit_input').
                      '</div>';     
             $html .= '</div>';

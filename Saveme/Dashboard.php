@@ -21,6 +21,9 @@ class Dashboard extends DashboardTool
         $this->addItem('ADD','Add new Files/Documents/Images',['link'=>"file?mode=add"]);
         
         if($login_user->getAccessLevel() === 'GOD') {
+            $this->addBlock('IMPORT',1,2,'Import data');
+            $this->addItem('IMPORT','Import logins and Notes',['link'=>'import','icon'=>'setup']);
+
             $this->addBlock('CONFIG',1,3,'Module Configuration');
             $this->addItem('CONFIG','Setup Database',['link'=>'setup_data','icon'=>'setup']);
         }    

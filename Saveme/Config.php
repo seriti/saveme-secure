@@ -42,10 +42,10 @@ class Config
         //S3 alternative bucket access credentials
         if(defined('AWS_S3_KEY_ALT')) {
             $replace = true;
-            $this->container->config->set('s3','region',AWS_S3_REGION,$replace);
-            $this->container->config->set('s3','key',AWS_S3_KEY,$replace);
-            $this->container->config->set('s3','secret',AWS_S3_SECRET,$replace);
-            $this->container->config->set('s3','bucket',AWS_S3_BUCKET,$replace);
+            $this->container->config->set('s3','region',AWS_S3_REGION_ALT,$replace);
+            $this->container->config->set('s3','key',AWS_S3_KEY_ALT,$replace);
+            $this->container->config->set('s3','secret',AWS_S3_SECRET_ALT,$replace);
+            $this->container->config->set('s3','bucket',AWS_S3_BUCKET_ALT,$replace);
         } 
 
         $submenu_html = $menu->buildNav($module['route_list'],MODULE_PAGE);
