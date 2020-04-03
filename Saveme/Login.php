@@ -32,7 +32,7 @@ class Login extends Table
         $this->addTableCol(array('id'=>'url','type'=>'URL','size'=>32,'title'=>'Login url'));
         $this->addTableCol(array('id'=>'user_name','type'=>'STRING','size'=>32,'title'=>'User name/email','encrypt'=>true,
                                  'hint'=>'This is encrypted and not searchable'));
-        $this->addTableCol(array('id'=>'password','type'=>'STRING','size'=>32,'title'=>'password','encrypt'=>true,
+        $this->addTableCol(array('id'=>'password','type'=>'STRING','size'=>32,'title'=>'password','encrypt'=>true,'copylink'=>true,
                                  'hint'=>'This is encrypted and not searchable'));
         $this->addTableCol(array('id'=>'login_date','type'=>'DATE','title'=>'Create date','edit'=>false));
         $this->addTableCol(array('id'=>'key_words','type'=>'TEXT','title'=>'Keywords','rows'=>3,'required'=>false,
