@@ -2,6 +2,7 @@
 namespace App\Saveme;
 
 use Seriti\Tools\Table;
+use Seriti\Tools\ENCRYPT_ROUTE;
 
 class Login extends Table 
 {
@@ -17,7 +18,7 @@ class Login extends Table
     public function setup($param = []) 
     {
         $system = $this->getContainer('system');
-        $encrypt_key = $system->configureEncryption(['redirect'=>'/admin/encrypt']);
+        $encrypt_key = $system->configureEncryption(['redirect'=>ENCRYPT_ROUTE]);
 
         $param = ['row_name'=>'Login','col_label'=>'name','encrypt_key'=>$encrypt_key];
         parent::setup($param);

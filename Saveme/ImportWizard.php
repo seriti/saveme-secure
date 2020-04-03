@@ -12,6 +12,7 @@ use Seriti\Tools\MessageHelpers;
 use Seriti\Tools\ContainerHelpers;
 use Seriti\Tools\BASE_UPLOAD;
 use Seriti\Tools\UPLOAD_TEMP;
+use Seriti\Tools\ENCRYPT_ROUTE;
 
 use App\Saveme\Helpers;
 
@@ -50,7 +51,7 @@ class ImportWizard
         if(defined('\Seriti\Tools\DEBUG')) $this->debug = \Seriti\Tools\DEBUG;
 
         $system = $this->getContainer('system');
-        $this->encrypt_key = $system->configureEncryption(['redirect'=>'/admin/encrypt']);
+        $this->encrypt_key = $system->configureEncryption(['redirect'=>ENCRYPT_ROUTE]);
     }
 
     public function process()

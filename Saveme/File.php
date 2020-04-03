@@ -3,6 +3,7 @@ namespace App\Saveme;
 
 use Seriti\Tools\Upload;
 use Seriti\Tools\Secure;
+use Seriti\Tools\ENCRYPT_ROUTE;
 
 class File extends Upload 
 {
@@ -12,7 +13,7 @@ class File extends Upload
         if(isset($_GET['mode'])) $mode = Secure::clean('basic',$_GET['mode']); else $mode='';
         if($mode === 'add' or $mode === 'upload' or $mode === 'download') {
             $system = $this->getContainer('system');
-            $encrypt_key = $system->configureEncryption(['redirect'=>'/admin/encrypt']);
+            $encrypt_key = $system->configureEncryption(['redirect'=>ENCRYPT_ROUTE]);
             $encrypt = true;
         } else {
             $encrypt = false;
@@ -20,7 +21,7 @@ class File extends Upload
         }
 
         $system = $this->getContainer('system');
-        $encrypt_key = $system->configureEncryption(['redirect'=>'/admin/encrypt']);
+        $encrypt_key = $system->configureEncryption(['redirect'=>ENCRYPT_ROUTE]);
 
         //NB: NO FILE PREFIX SET. All other amazon filestorage classes will need a prefix so as not to accidentally overwrite  
         $param = ['row_name'=>'File',
