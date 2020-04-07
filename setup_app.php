@@ -6,7 +6,7 @@ add the below code snippet to the end of existing "src/setup_app.php" file.
 This tells the framework about module: name, sub-memnu route list and title, database table prefix.
 */
 
-$container['config']->set('module','saveme',['name'=>'Saveme',
+$container['config']->set('module','saveme',['name'=>'Saveme secure',
                                              'route_root'=>'admin/saveme/',
                                              'route_list'=>['dashboard'=>'Dashboard','login'=>'Logins',
                                                             'file'=>'Files','text'=>'Notes'],

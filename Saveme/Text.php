@@ -35,9 +35,10 @@ class Text extends Table
         $this->addTableCol(array('id'=>'text_id','type'=>'INTEGER','title'=>'Note ID','key'=>true,'key_auto'=>true,'list'=>false));
         $this->addTableCol(array('id'=>'name','type'=>'STRING','title'=>'Note title'));
         $this->addTableCol(array('id'=>'text_date','type'=>'DATE','title'=>'Create date','edit'=>false));
-        $this->addTableCol(array('id'=>'key_words','type'=>'TEXT','title'=>'Keywords','cols'=>60,'rows'=>3,'required'=>false,'copylink'=>true,
+        $this->addTableCol(array('id'=>'key_words','type'=>'TEXT','title'=>'Keywords','cols'=>60,'rows'=>3,'required'=>false,
                                  'hint'=>'(Keywords are searchable and allow you to effectively group information)'));
-        $this->addTableCol(array('id'=>'text','type'=>'TEXT','title'=>'Text','cols'=>60,'rows'=>10,'encrypt'=>true,'hint'=>'(All this text is encrypted before being stored in database, and not searchable)'));
+        $this->addTableCol(array('id'=>'text','type'=>'TEXT','title'=>'Text','cols'=>60,'rows'=>10,'encrypt'=>true,'copylink'=>true,
+                                 'hint'=>'(All this text is encrypted before being stored in database, and not searchable)'));
 
         $this->addSortOrder('text_date DESC','Create date latest','DEFAULT');
 
