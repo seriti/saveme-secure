@@ -18,7 +18,7 @@ $app->group('/admin', function () {
         $this->any('/jscrypt', \App\Saveme\JscryptController::class);
     })->add(\App\Saveme\Config::class);
 
-})->add(\App\ConfigAdmin::class);
+})->add(\App\User\ConfigAdmin::class);
 
 
 
