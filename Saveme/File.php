@@ -10,6 +10,7 @@ class File extends Upload
   //configure
     public function setup($param = []) 
     {
+        /*
         if(isset($_GET['mode'])) $mode = Secure::clean('basic',$_GET['mode']); else $mode='';
         if($mode === 'add' or $mode === 'upload' or $mode === 'download') {
             $system = $this->getContainer('system');
@@ -19,7 +20,9 @@ class File extends Upload
             $encrypt = false;
             $encrypt_key = '';
         }
+        */
 
+        $encrypt = true;
         $system = $this->getContainer('system');
         $encrypt_key = $system->configureEncryption(['redirect'=>ENCRYPT_ROUTE]);
 
